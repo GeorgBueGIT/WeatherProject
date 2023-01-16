@@ -1,14 +1,20 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
-import TextField from '@mui/material/TextField';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 
 function App() {
 
   const [weatherData, setWeatherData] = useState({});
-  //  const [city, setCity] = useState('Stuttgart');
+  const [loading, setLoading] = useState(true);
+  const [city, setCity] = useState('Stuttgart');
+  const [textInput, setInput] = useState('');
 
-  const key = '078aef7f29f0deb7444ee7d94b5c94f5';
+  const key = 'EGWZBVQGZGUCQMGN57N26TQSV';
+  const fetchURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&key=GULV4PSEG2ZAQNKGHQ953UDMX&contentType=json";
+
+  const iconSource = './WeatherIcons/clear-day.png';
 
   const sun = "https://cdn-icons-png.flaticon.com/512/4814/4814268.png";
   const cloudy = "https://cdn-icons-png.flaticon.com/512/1146/1146869.png";
@@ -16,77 +22,115 @@ function App() {
   const rain = "https://cdn-icons-png.flaticon.com/512/4834/4834677.png";
   const snow = "https://cdn-icons-png.flaticon.com/512/6363/6363108.png";
 
-
-  let addressAr = ["", "", ""];
-
-  // useEffect(() => {
-
-  //   const ar = fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Stuttgart?unitGroup=metric&key=EGWZBVQGZGUCQMGN57N26TQSV&contentType=json`)
-  //     .then(response => response.json())
-  //     .then(data => {setWeatherData(data); 
-  //                    addressAr = weatherData.resolvedAddress.split(", ");})
-  //     .catch(function(error) {
-  //       console.log('Request failed', error)
-  //       });
-
-  // }, []);
+  var today = new Date();
+  var dateTime = today.getDate() + "." + (today.getMonth() + 1) + "." + today.getFullYear() + "  " + today.getHours() + ":" + today.getMinutes();
 
 
-  fetch("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Stuttgart?unitGroup=metric&key=EGWZBVQGZGUCQMGN57N26TQSV&contentType=json", {
-    "method": "GET",
-    "headers": {
-    }
-  })
-    .then(response => response.json())
-    .then(data => setWeatherData(data))
-    .catch(err => {
-      console.error(err);
+  const fetchData = async () => {
+    const response = await fetch(fetchURL, {
+      "method": "GET",
+      "headers": {
+      }
     });
+    const data = await response.json();
+    setWeatherData(data);
+    console.log(data);
+    setLoading(false);
+  };
+
+
+  useEffect(() => {
+    fetchData()
+  }, [city])
+
+  
 
 
 
-  // let alert = null;
-  // if(weatherData.alerts[0].event !== null){
-  //   let alert = weatherData.alerts[0].event;
-  // }
+  function WeatherDisplay() {
+  
+    if (!loading) {
+
+    const daylightStatus = () =>{
+      var nowTime = new Date();
+      var nowHour = nowTime.getHours;
+      var nowMinutes = nowTime.getMinutes;
+
+      var sunriseTime = weatherData.currentConditions.sunrise.split(":");
+      var sunsetTime = weatherData.currentConditions.sunset.split(":");
+
+      console.log(sunriseTime[0]);
+
+            if(nowMinutes <= sunriseTime[1] && nowHour <= sunriseTime[0]){
+              return 0;
+            }
+            else if(nowMinutes >= sunsetTime[1] && nowHour >= sunsetTime[0]){
+              return 100;
+            }
+            else{
+              const minutesSunsetDifSunrise = sunsetTime[0] * 60 + sunsetTime[1] - sunriseTime[0] * 60 + sunriseTime[1];
+              const minutesNowDifSunrise = nowHour * 60 + nowMinutes - sunriseTime[0] * 60 + sunriseTime[1];
+              const percentage = Math.round(minutesNowDifSunrise / minutesSunsetDifSunrise * 100);
+              return percentage;
+            }
+    }
+
+      return (
+        <div className='weatherData'>
+
+          <div className='head'>
+            <div className='address'>
+              <b> {weatherData.address} </b>
+              <b className='AddressWOCity'> {weatherData.resolvedAddress.split(", ")[1]},  {weatherData.resolvedAddress.split(", ")[2]}</b>
+            </div>
+            <div> <img src={snow} width={"64px"} height={"64px"} /> </div>
+            {/* <div className="icon"> <img src='WeatherIcons/clear-day.png' alt="Funktioniert nicht" width="64px" height="64px"/> </div> */}
+          </div>
+
+          <div className='middle'>
+            <b className='temp'> {weatherData.currentConditions.temp}°</b>
+            <b id="time"> {dateTime} </b>
+          </div>
+
+          <LinearProgress variant="determinate" className='bar' value={daylightStatus} />
+
+
+          <div className='bottom'>
+            <div className='rows'>
+              <div className="icon2"> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098355.png'} width={"24px"} height={"24px"} /> </div>
+              <div className="icon2"> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098358.png'} width={"24px"} height={"24px"} /> </div>
+            </div>
+            <div className='rows'>
+              <b> {weatherData.currentConditions.sunrise} </b>
+              <b> {weatherData.currentConditions.sunset}  </b>
+            </div>
+          </div>
+
+          <div className='visualSeperator'> </div>
+
+          {/* Hier noch Vorhersage (vlt so 5 Tage) */}
+
+        </div>
+      );
+    }
+
+  }
+
 
   return (
 
     <div className='page'>
-      {/* <div className='weatherData'>
-
-        <div className='head'>
-          <b> {weatherData.address} </b>
-          <div className="icon"> <img src={snow} width={"64px"} height={"64px"} /> </div>
-        </div>
-
-        <b className='AddressWOCity'> {addressAr[1]},  {addressAr[2]}</b>
-
-
-        <div className='timeAndAlert'>
-          <b className='middle'> {weatherData.currentConditions.temp} °C</b>
-          <b id="alert"> {alert}</b> 
-        </div>
-        <b id="time"> 14:22 </b>
-
-        <LinearProgress variant="determinate" className='bar' value={66} />
-
-
-        <div className='bottom'>
-          <div className='rows'>
-            <div className="icon2"> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098355.png'} width={"24px"} height={"24px"} /> </div>
-            <div className="icon2"> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098358.png'} width={"24px"} height={"24px"} /> </div>
-          </div>
-          <div className='rows'>
-            <b> {weatherData.currentConditions.sunrise} </b>
-            <b> {weatherData.currentConditions.sunset}  </b>
-          </div>
-        </div>
-
+      <WeatherDisplay />
+      <div className='inputArea'>
+      <div id="locationDiv"> <LocationOnIcon sx={{ fontSize: 20 }} /> </div>
+      <input type="text" id="inputTextfield" placeholder=" Type in City" value={textInput} onChange={(newValue) => setInput(newValue.target.value)} onKeyDown={event => {
+        if(event.key === 'Enter'){
+          setCity(textInput); 
+          setInput('');
+        }
+      }}/>
+        
       </div>
-
-      <TextField id="standard-basic" label="Type in City" variant="standard" /> */}
-
     </div>
   );
 }

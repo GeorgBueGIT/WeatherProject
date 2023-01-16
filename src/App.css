@@ -1,60 +1,91 @@
+.page{
+  height: 100vh;
+  width: 100vw;
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  color: rgb(0, 0, 0);
+  background-color: #151515;
+}
+
+
 .weatherData{
   height: 350px;
   min-width: 300px;
   max-width: 400px;
-  background-color: black;
+  
+  background-color: #f5f5f5;
+  color: black;
+  
   border-radius: 15px;
   border-style: solid;
   border-width: 1px;
-  color: white;
+  
   display: flex;
   flex-direction: column;
   padding: 5px 5px 15px 5px;
   align-content: space-between;
   justify-content: space-between;
   align-items: center;
+  
   user-select: none;
 
 }
 
-.container{
-  padding-top: 100px;
+.head{
+  width: 95%;
+
+  display: flex;
+  flex-direction: row;
+  align-items:flex-start;
+  justify-content: space-between;
+  
+  font-size: 40px;
+  font-weight: bold;
 }
+
+
+.address{
+    display:flex;
+    flex-direction: column;
+}
+
+.AddressWOCity{
+  font-size: 13px;
+  color: #bdbdbd;
+  padding-left: 2px;
+}
+
+.middle{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.temp{
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  font-weight:900;
+}
+
+#time{
+    font-size: 13px;
+    font-weight:700;
+    color: #bdbdbd;
+    display: flex;
+    justify-content: center;
+}
+
+
 
 .text{
   color: green;
 }
 
-.icon{
-  width: 64px;
-  height: 64px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.page{
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: wheat;
-  flex-direction: column;
-}
-
-.head{
-  /* min-width: 250px;
-  max-width: 350px; */
-  width: 95%;
-  display: flex;
-  flex-direction: row;
-  align-items:flex-start;
-  justify-content: space-between;
-  font-size: 40px;
-  font-weight: bold;
-}
 
 .bottom{
   min-width: 250px;
@@ -68,11 +99,7 @@
     color: #bdbdbd;
     z-index: 2;
 }
-.middle{
-  display: flex;
-  justify-content: center;
-  font-size: 50px;
-}
+
 
 .outer{
   background-color: white;
@@ -103,29 +130,13 @@ border-radius: 10px;
    background-color: white;
 }
 
-#time{
-    font-size: 10px;
-    color: #bdbdbd;
-}
+
 
 #alert{
   font-size: 10px;
   color: #bdbdbd;
 }
 
-.timeAndAlert{
-  display: flex;
-  flex-direction: column;  
-  align-items: center;
-}
-
-.AddressWOCity{
-  font-size: 13px;
-  color: #bdbdbd;
-  position: absolute;
-  padding-top: 58px;
-  padding-right: 60px;
-}
 
 .rows{
   display: flex;
@@ -139,4 +150,78 @@ border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.inputArea{
+
+  min-width: 300px;
+  max-width: 400px;
+
+  justify-content: center;
+/* 
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 1px; */
+  
+  display: flex;
+  flex-direction: row;
+  /* padding: 5px 5px 15px 5px; */
+  align-content: space-between;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: 10px;
+}
+
+
+#inputTextfield{
+  height: 30px;
+  width: 273px;
+
+  border: none;
+  border-radius: 3px;
+
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: 700;
+
+  padding-left: 10px;
+}
+
+#inputTextfield:focus{
+  outline: none;
+  
+}
+
+#inputTextfield::placeholder{
+  font-weight: 500;
+  color: #bfbfbf;
+}
+
+#inputTextfield:focus::placeholder {
+  color: transparent;
+}
+
+#locationDiv{
+  height: 30px;
+  width: 25px;
+
+  border: none;
+  border-radius: 3px;
+
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: 700;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.visualSeperator{
+  height: 1px;
+  width: 95%;
+  background-color: rgb(232, 232, 232);
 }
