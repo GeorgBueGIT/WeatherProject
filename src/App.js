@@ -49,32 +49,28 @@ function App() {
 
     if (!loading) {
 
-      const daylightStatus = () => {
+      const forecastArray = weatherData.days;
+      var percent = 0;
+
         var nowTime = new Date();
-        var nowHour = nowTime.getHours;
-        var nowMinutes = nowTime.getMinutes;
+        var nowHour =  nowTime.getHours();
+        var nowMinutes = nowTime.getMinutes();
 
         var sunriseTime = weatherData.currentConditions.sunrise.split(":");
         var sunsetTime = weatherData.currentConditions.sunset.split(":");
 
-        console.log(sunriseTime[0]);
-
-        const forecastArray = weatherData.days;
-
-
         if (nowMinutes <= sunriseTime[1] && nowHour <= sunriseTime[0]) {
-          return 0;
+          percent = 0;
         }
         else if (nowMinutes >= sunsetTime[1] && nowHour >= sunsetTime[0]) {
-          return 100;
+          percent = 100;
         }
         else {
-          const minutesSunsetDifSunrise = sunsetTime[0] * 60 + sunsetTime[1] - sunriseTime[0] * 60 + sunriseTime[1];
+          const minutesSunsetDifSunrise = ((sunsetTime[0] * 60 + sunsetTime[1]) - (sunriseTime[0] * 60 + sunriseTime[1]));
           const minutesNowDifSunrise = nowHour * 60 + nowMinutes - sunriseTime[0] * 60 + sunriseTime[1];
-          const percentage = Math.round(minutesNowDifSunrise / minutesSunsetDifSunrise * 100);
-          return percentage;
+          percent = Math.round(((minutesNowDifSunrise / minutesSunsetDifSunrise)*100));
         }
-      }
+
 
       return (
         <div className='weatherData'>
@@ -94,7 +90,7 @@ function App() {
             <b id="time"> {dateTime} </b>
           </div>
 
-          <LinearProgress variant="determinate" className='bar' value={daylightStatus} />
+          <LinearProgress variant="determinate" className='bar' value={percent} />
 
 
           <div className='bottom'>
