@@ -23,7 +23,7 @@ function App() {
   const snow = "https://cdn-icons-png.flaticon.com/512/6363/6363108.png";
 
   var today = new Date();
-  var dateTime = today.getDate() + "." + (today.getMonth() + 1) + "." + today.getFullYear() + "  " + today.getHours() + ":" + today.getMinutes();
+  var dateTime = today.getHours() + ":" + today.getMinutes();
 
 
   const fetchData = async () => {
@@ -43,37 +43,38 @@ function App() {
     fetchData()
   }, [city])
 
-  
-
 
 
   function WeatherDisplay() {
-  
+
     if (!loading) {
 
-    const daylightStatus = () =>{
-      var nowTime = new Date();
-      var nowHour = nowTime.getHours;
-      var nowMinutes = nowTime.getMinutes;
+      const daylightStatus = () => {
+        var nowTime = new Date();
+        var nowHour = nowTime.getHours;
+        var nowMinutes = nowTime.getMinutes;
 
-      var sunriseTime = weatherData.currentConditions.sunrise.split(":");
-      var sunsetTime = weatherData.currentConditions.sunset.split(":");
+        var sunriseTime = weatherData.currentConditions.sunrise.split(":");
+        var sunsetTime = weatherData.currentConditions.sunset.split(":");
 
-      console.log(sunriseTime[0]);
+        console.log(sunriseTime[0]);
 
-            if(nowMinutes <= sunriseTime[1] && nowHour <= sunriseTime[0]){
-              return 0;
-            }
-            else if(nowMinutes >= sunsetTime[1] && nowHour >= sunsetTime[0]){
-              return 100;
-            }
-            else{
-              const minutesSunsetDifSunrise = sunsetTime[0] * 60 + sunsetTime[1] - sunriseTime[0] * 60 + sunriseTime[1];
-              const minutesNowDifSunrise = nowHour * 60 + nowMinutes - sunriseTime[0] * 60 + sunriseTime[1];
-              const percentage = Math.round(minutesNowDifSunrise / minutesSunsetDifSunrise * 100);
-              return percentage;
-            }
-    }
+        const forecastArray = weatherData.days;
+
+
+        if (nowMinutes <= sunriseTime[1] && nowHour <= sunriseTime[0]) {
+          return 0;
+        }
+        else if (nowMinutes >= sunsetTime[1] && nowHour >= sunsetTime[0]) {
+          return 100;
+        }
+        else {
+          const minutesSunsetDifSunrise = sunsetTime[0] * 60 + sunsetTime[1] - sunriseTime[0] * 60 + sunriseTime[1];
+          const minutesNowDifSunrise = nowHour * 60 + nowMinutes - sunriseTime[0] * 60 + sunriseTime[1];
+          const percentage = Math.round(minutesNowDifSunrise / minutesSunsetDifSunrise * 100);
+          return percentage;
+        }
+      }
 
       return (
         <div className='weatherData'>
@@ -84,7 +85,8 @@ function App() {
               <b className='AddressWOCity'> {weatherData.resolvedAddress.split(", ")[1]},  {weatherData.resolvedAddress.split(", ")[2]}</b>
             </div>
             <div> <img src={snow} width={"64px"} height={"64px"} /> </div>
-            {/* <div className="icon"> <img src='WeatherIcons/clear-day.png' alt="Funktioniert nicht" width="64px" height="64px"/> </div> */}
+            {/* <div className="icon"> <img src='./WeatherIcons/clear-day.png' alt="Funktioniert nicht"/> </div> */}
+
           </div>
 
           <div className='middle'>
@@ -108,7 +110,26 @@ function App() {
 
           <div className='visualSeperator'> </div>
 
-          {/* Hier noch Vorhersage (vlt so 5 Tage) */}
+          {/* Hier noch Vorhersage */}
+
+          <div className="forecast">
+            {weatherData.days.map((item) => {
+              return (
+                <div className="forecastDay">
+                  <div className="forecastDate">
+                    <b> {item.datetime.split("-")[2]}. </b>
+                    <b> {item.datetime.split("-")[1]} </b>
+                  </div>
+                  <div> <img src={snow} width={"16px"} height={"16px"} /> </div>
+                  <b> {item.temp}° </b>
+                </div>
+              )
+            })
+            }
+
+
+
+          </div>
 
         </div>
       );
@@ -121,15 +142,16 @@ function App() {
 
     <div className='page'>
       <WeatherDisplay />
+
       <div className='inputArea'>
-      <div id="locationDiv"> <LocationOnIcon sx={{ fontSize: 20 }} /> </div>
-      <input type="text" id="inputTextfield" placeholder=" Type in City" value={textInput} onChange={(newValue) => setInput(newValue.target.value)} onKeyDown={event => {
-        if(event.key === 'Enter'){
-          setCity(textInput); 
-          setInput('');
-        }
-      }}/>
-        
+        <div id="locationDiv"> <LocationOnIcon sx={{ fontSize: 20 }} /> </div>
+        <input type="text" id="inputTextfield" placeholder=" Type in City" value={textInput} onChange={(newValue) => setInput(newValue.target.value)} onKeyDown={event => {
+          if (event.key === 'Enter') {
+            setCity(textInput);
+            setInput('');
+          }
+        }} />
+
       </div>
     </div>
   );

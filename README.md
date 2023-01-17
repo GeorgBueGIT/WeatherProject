@@ -28,11 +28,17 @@ Dynamische Wahl des Icons
 
 Nächsten Schritte:
 - [ ] Progress Bar Value berechnen
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Scrollpanel Vorhersage                 (Morgen)
+- [ ] Icons Fixen                            (Heute)
+- [ ] Vlt. kleine DB
+- [ ] Style                                  (Morgen)
 
+
+ _  _  _  _  _   _  _ _ _ _ _ 
+|                            |
+|  |   |    |     |     |    |            Scrollpanel  so seitlich für Vorhersage scrollen
+|
+ - -  - - - - - - - - - - - -  
+
+
+ prüf ob die icons kaputt sind durch neues Icon herunterladen und da in Ordner packen!
