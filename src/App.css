@@ -13,21 +13,25 @@
 
 
 .weatherData{
-  height: 350px;
-  /* min-width: 300px;
-  max-width: 400px; */
-  width: 300px;
+  height: 450px;
+  min-width: 300px;
+  max-width: 350px;
+  /* width: 300px; */
   
-  background-color: #f5f5f5;
-  color: black;
+  background-color: #000000;
+
+  background-image: linear-gradient(to top, rgb(0, 0, 0) 40%, #151515 100%);
+
+
+  color: rgb(255, 255, 255);
   
   border-radius: 15px;
-  border-style: solid;
+  border-style: none;
   border-width: 1px;
   
   display: flex;
   flex-direction: column;
-  padding: 5px 5px 15px 5px;
+  padding: 10px 10px 10px 10px;
   align-content: space-between;
   justify-content: space-between;
   align-items: center;
@@ -60,11 +64,6 @@
   padding-left: 2px;
 }
 
-.middle{
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-}
 
 .temp{
   display: flex;
@@ -88,18 +87,7 @@
 }
 
 
-.bottom{
-  min-width: 250px;
-  max-width: 350px;
 
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    /* font-weight: bold; */
-    font-size: 10px;
-    color: #bdbdbd;
-    z-index: 2;
-}
 
 
 .outer{
@@ -143,6 +131,13 @@ border-radius: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  min-width: 300px;
+  max-width: 350px;
+
+    font-size: 10px;
+    color: #bdbdbd;
+    z-index: 2;
 }
 
 .icon2{
@@ -168,8 +163,7 @@ border-radius: 10px;
   display: flex;
   flex-direction: row;
   /* padding: 5px 5px 15px 5px; */
-  align-content: space-between;
-  justify-content: space-between;
+
   align-items: center;
 
   padding-top: 10px;
@@ -179,7 +173,8 @@ border-radius: 10px;
 
 #inputTextfield{
   height: 30px;
-  width: 273px;
+  min-width: 300px;
+  max-width: 350px;
 
   border: none;
   border-radius: 3px;
@@ -193,6 +188,7 @@ border-radius: 10px;
 
 #inputTextfield:focus{
   outline: none;
+  border-radius:  3px 0px 0px 3px;
   
 }
 
@@ -210,7 +206,7 @@ border-radius: 10px;
   width: 25px;
 
   border: none;
-  border-radius: 3px;
+  border-radius: 0px 3px 3px 0px ;
 
   background-color: #000000;
   color: #ffffff;
@@ -225,7 +221,7 @@ border-radius: 10px;
 .visualSeperator{
   height: 1px;
   width: 95%;
-  background-color: rgb(232, 232, 232);
+  background-color: rgb(49, 49, 49);
 }
 
 
@@ -234,34 +230,49 @@ border-radius: 10px;
   display: flex;
   flex-direction: row;
   overflow: auto;
-  cursor: grab;
-  padding: 0 5px 0 5px;
+  padding: 5px 5px 5px 5px;
 
-  height: 80px;
-  width: 95%;
+  height: 25%;
+  min-height: 70px;
+  width: 100%;
+
+  gap: 5px;
+
+  border-radius: 10px  10px 10px 10px;
+
+  background-color: #151515;
 }
 
 .forecastDay{
-  min-width: 20%;
+  min-width: 25%;
   height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  justify-content: space-between;
 
-  border-width: 1px;
-  border-color: rgb(232, 232, 232);
+  border-width: 3px;
+  border-color: rgb(58, 58, 58);
   border-radius: 5px;
-  border-style: solid;
+  border-style: none;
 
-  font-size: 10px;
-  font-weight: 500;
+  background-color: #000000;
+
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .forecastDate{
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 5px;
+  padding-left: 7px ;
+
+  color: #bdbdbd;
 }
 
 
@@ -273,15 +284,55 @@ border-radius: 10px;
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: none;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgb(218, 218, 218);
+  border-radius: 100px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+
+#errorAlert{
+  padding-top: 10px;
+}
+
+
+.column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weatherImage{
+  max-width: 64px;
+}
+
+.weatherImage2{
+  max-height: 24px; 
+}
+
+
+.iconAndTemp{
+  font-size: 10px;
+  font-weight: 500;
+  color: #bdbdbd;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 5px;
+}
+
+
+.image{
+  max-width: 100%;
 }

@@ -1,37 +1,24 @@
-https://openweathermap.org/appid
 
---> 
-    https://www.visualcrossing.com/weather/weather-data-services/Stuttgart?v=api
+Weather API: https://www.visualcrossing.com/weather/weather-data-services/Stuttgart?v=api
 
+https://www.figma.com/community/file/1126777451931792118
 
-Css und fonts ordner sind icons, funktioniert aber nocg ncuigt muss die ja irgenwie importieren
+https://dribbble.com/shots/18136946-Weather-Icon-Pack
 
 
 
 ToDo:
-- Fetchen muss immer funktionieren XXXX
-- Dynamische Stadt änderung   XXXX
-- Style bisschen
 - AnimeJS irgendwas animieren    (Textfield runter animieren und Progressbar selber machen + vlt animieren)
-- Backend anbindung
-
-
-Oder AniemJS benutzen um so Wetter hinzufügen --> dann so wien Drehrad
-
-
-Vorhersage?
-Alerts?
-Dynamische Wahl des Icons
-
+- Backend 
 
 
 
 Nächsten Schritte:
-- [ ] Progress Bar Value berechnen
-- [ ] Scrollpanel Vorhersage                 (Morgen)
-- [ ] Icons Fixen                            (Heute)
+- [X] Progress Bar Value berechnen
+- [ ] Scrollpanel Vorhersage                 
+- [X] Icons Fixen                            
 - [ ] Vlt. kleine DB
-- [ ] Style                                  (Morgen)
+- [ ] Style                                  
 
 
  _  _  _  _  _   _  _ _ _ _ _ 
@@ -40,5 +27,3 @@ Nächsten Schritte:
 |
  - -  - - - - - - - - - - - -  
 
-
- prüf ob die icons kaputt sind durch neues Icon herunterladen und da in Ordner packen!
