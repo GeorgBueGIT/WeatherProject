@@ -6,7 +6,7 @@
     border-radius: 150px;
 
      display: flex;
-     justify-content: start; 
+     justify-content: flex-start; 
      align-items: center;
   
      box-shadow: 1px 0px 10px #e7d729;
@@ -19,7 +19,7 @@
     border-radius: 145px 150px 150px  145px;
 
     display: flex;
-    justify-content: start; 
+    justify-content: flex-start; 
     align-items: center;
 
 }
