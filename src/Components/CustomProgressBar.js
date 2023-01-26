@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import '../CSS/CustomProgressBar.css';
 
-function ProgressBar({ daylightProgress }) {
+function CustomProgressBar({ daylightProgress }) {
 
-   const [daylightPercentValue, setdaylightPercentValue] = useState(daylightProgress.value);
+   const [daylightPercentValue, setdaylightPercentValue] = useState(daylightProgress);
 
    const [daylightSelectionOuter, setdaylightSelectionOuter] = useState(0);
    const [daylightSelectionMiddle, setdaylightSelectionMiddle] = useState(0);
    const [daylightSelectionInner, setdaylightSelectionInner] = useState(0);
    const [isLoading, setIsLoading] = useState(true);
 
+   
 
    useEffect(() => {
 
-      console.log(daylightProgress.value);
-      if (daylightProgress.value >= 20 && daylightProgress.value <= 80) {
+      console.log(daylightProgress);
+
+      if (daylightProgress >= 20 && daylightProgress <= 80) {
          setdaylightPercentValue(100);
       }
-      else if (daylightProgress.value < 20) {
-         setdaylightPercentValue(daylightProgress.value * 5);
+      else if (daylightProgress < 20) {
+         setdaylightPercentValue(daylightProgress * 5);
       }
       else {
-         setdaylightPercentValue((100 - daylightProgress.value) * 5);
+         setdaylightPercentValue((100 - daylightProgress) * 5);
       }
 
-   }, [daylightProgress.value]);
+   }, [daylightProgress]);
 
 
 
@@ -75,4 +77,4 @@ function ProgressBar({ daylightProgress }) {
    }
 }
 
-export default ProgressBar
+export default CustomProgressBar

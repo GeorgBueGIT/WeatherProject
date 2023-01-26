@@ -15,41 +15,41 @@ function App() {
   const [cityApproved, setCityApproved] = useState(true);
 
   const key = 'K33WSN84G3H86NQKB86QS9XQF';
-  const fetchURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&key=" + key + "&contentType=json";
 
 
   var today = new Date();
   var dateTime = ((today.getHours() > 9) ? today.getHours() : '0' + today.getHours()) + ":" + ((today.getMinutes() > 9) ? today.getMinutes() : '0' + today.getMinutes())
 
-
-  const fetchData = async () => {
-
-    try {
-      const response = await fetch(fetchURL, {
-        "method": "GET",
-        "headers": {
-        }
-      });
-      const data = await response.json();
-      setWeatherData(data);
-      console.log(data);
-      setIsLoading(false);
-      setCityApproved(true);
-
-    } catch (error) {
-      setCityApproved(false);
-    }
-
-
-  };
-
   useEffect(() => {
+    const fetchURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&key=" + key + "&contentType=json";
+    const fetchData = async () => {
+
+      try {
+        const response = await fetch(fetchURL, {
+          "method": "GET",
+          "headers": {
+          }
+        });
+        const data = await response.json();
+        setWeatherData(data);
+        console.log(data);
+        setIsLoading(false);
+        setCityApproved(true);
+
+      } catch (error) {
+        setCityApproved(false);
+      }
+
+
+    };
+
     fetchData();
+
   }, [city])
 
 
-    useEffect(() => {
-      if(!isLoading){
+  useEffect(() => {
+    if (!isLoading) {
       var nowTime = new Date();
       var nowHour = nowTime.getHours();
       var nowMinutes = nowTime.getMinutes();
@@ -70,8 +70,8 @@ function App() {
         const minutesNowDifSunrise = (nowHour * 60 + nowMinutes - (parseInt(sunriseTime[1]) + parseInt(sunriseTime[0]) * 60));
         setDaylightProgress(Math.round(((minutesNowDifSunrise / minutesSunsetDifSunrise) * 100)));
       }
-         }
-    }, [isLoading, city]);
+    }
+  }, [isLoading, weatherData]);
 
 
   if (!isLoading) {
@@ -79,7 +79,7 @@ function App() {
     return (
       <div className='page'>
 
-        <CustomProgressBar daylightProgress={{ value: daylightProgress }} />
+        <CustomProgressBar daylightProgress={daylightProgress} />
 
         <div className='weatherData'>
 
@@ -128,8 +128,8 @@ function App() {
                     <b> {item.datetime.split("-")[1]} </b>
                   </div>
                   <div className='iconAndTemp'>
-                  <div className="icon"> <img src={require('./RealNiceWeatherIcons/' + item.icon + '.png')} alt="Weathericon" className='weatherImage2'/> </div>
-                  <b style={{display:'flex', justifyContent:'center'}}> {item.temp}° </b>
+                    <div className="icon"> <img src={require('./RealNiceWeatherIcons/' + item.icon + '.png')} alt="Weathericon" className='weatherImage2' /> </div>
+                    <b style={{ display: 'flex', justifyContent: 'center' }}> {item.temp}° </b>
                   </div>
                   <div></div>
                 </div>
@@ -141,7 +141,7 @@ function App() {
 
 
         <div className='inputArea'>
-          
+
           <input type="text" id="inputTextfield" placeholder=" Type in City" value={textInput} onChange={(newValue) => setInput(newValue.target.value)} onKeyDown={event => {
             if (event.key === 'Enter') {
               setCity(textInput);
