@@ -115,7 +115,7 @@ function App() {
             </div>
           </div>
 
-          <img src={require('./Media/pngegg.png')} alt="Just a visual" id='visualLine'></img>
+          <img src={require('./Media/dottedline.png')} alt="Just a visual" id='visualLine'></img>
 
           <div id="forecast">
             {weatherData.days.map((item, id) => {
