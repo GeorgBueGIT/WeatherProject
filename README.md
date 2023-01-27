@@ -1,29 +1,13 @@
 
-Weather API: https://www.visualcrossing.com/weather/weather-data-services/Stuttgart?v=api
 
-https://www.figma.com/community/file/1126777451931792118
+    Eine Kleine Wetter WebApp um mir React beizubringen und meine HTML, CSS und JS Kenntnisse etwas aufzufrischen und zu verbessern.
 
-https://dribbble.com/shots/18136946-Weather-Icon-Pack
-
-
-
-ToDo:
-- AnimeJS irgendwas animieren    (Textfield runter animieren und Progressbar selber machen + vlt animieren)
-- Backend 
+    ! Das hier soll kein fertiges Produkt sein, bin an der Entwicklung noch dran.
 
 
 
-Nächsten Schritte:
-- [X] Progress Bar Value berechnen
-- [ ] Scrollpanel Vorhersage                 
-- [X] Icons Fixen                            
-- [ ] Vlt. kleine DB
-- [ ] Style                                  
+    Gehostet mit netlify: https://unrivaled-squirrel-460847.netlify.app/
 
 
- _  _  _  _  _   _  _ _ _ _ _ 
-|                            |
-|  |   |    |     |     |    |            Scrollpanel  so seitlich für Vorhersage scrollen
-|
- - -  - - - - - - - - - - - -  
-
+    Weather API: https://www.visualcrossing.com/weather-api
+    Weather Iconset: https://dribbble.com/shots/18136946-Weather-Icon-Pack

@@ -12,11 +12,10 @@
 }
 
 
-.weatherData{
+#weatherPanel{
   height: 450px;
   min-width: 300px;
   max-width: 350px;
-  /* width: 300px; */
   
   background-color: #000000;
 
@@ -40,7 +39,9 @@
 
 }
 
-.head{
+/* ////////////////////////////////////////////////////////////  */
+
+#head{
   width: 95%;
 
   display: flex;
@@ -48,86 +49,40 @@
   align-items:flex-start;
   justify-content: space-between;
   
-  font-size: 40px;
+  font-size:2.2vw;
   font-weight: bold;
 }
 
-
-.address{
+#address{
     display:flex;
     flex-direction: column;
 }
 
-.AddressWOCity{
+#addressWOCity{
   font-size: 13px;
   color: #bdbdbd;
   padding-left: 2px;
 }
 
+#weatherImage{
+  max-width: 64px;
+}
 
-.temp{
+
+/* ////////////////////////////////////////////////////////////  */
+
+
+#temp{
   display: flex;
   justify-content: center;
   font-size: 50px;
   font-weight:900;
 }
 
-#time{
-    font-size: 13px;
-    font-weight:700;
-    color: #bdbdbd;
-    display: flex;
-    justify-content: center;
-}
+/* ////////////////////////////////////////////////////////////  */
 
 
-
-.text{
-  color: green;
-}
-
-
-
-
-
-.outer{
-  background-color: white;
-  min-width: 225px;
-  max-width: 30px;
-  height: 50px;
-  border-radius: 100px;
-  display: flex;
-  justify-content:center;
-  align-items:flex-end;
-}
-
-.inner{
-  background-color: black;
-  min-width: 230px;
-  max-width: 30px;
-  height: 47px;
-  border-radius: 100px;
-}
-
-.bar{
-width: 100px;
-border-radius: 10px;
-}
-
-
-.css-eglki6-MuiLinearProgress-root {
-   background-color: white;
-}
-
-
-
-#alert{
-  font-size: 10px;
-  color: #bdbdbd;
-}
-
-
-.rows{
+#sTs{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -140,16 +95,127 @@ border-radius: 10px;
     z-index: 2;
 }
 
-.icon2{
-  height: auto;
-  max-width: 24px;
+.sTscolumn{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+#time{
+    font-size: 13px;
+    font-weight:700;
+    color: #bdbdbd;
+    display: flex;
+    justify-content: center;
+}
 
-.inputArea{
+
+/* ////////////////////////////////////////////////////////////  */
+
+
+#visualLine{
+  max-width: 100%;
+}
+
+
+/* ////////////////////////////////////////////////////////////  */
+
+
+#forecast{
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  padding: 5px 5px 5px 5px;
+
+  height: 25%;
+  min-height: 70px;
+  width: 100%;
+
+  gap: 5px;
+
+  border-radius: 10px  10px 10px 10px;
+
+  background-color: #151515;
+}
+
+#forecastDay{
+  min-width: 25%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-width: 3px;
+  border-color: rgb(58, 58, 58);
+  border-radius: 5px;
+  border-style: none;
+
+  background-color: #000000;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+#forecastDate{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 5px;
+  padding-left: 7px ;
+
+  color: #bdbdbd;
+}
+
+
+#iconAndTemp{
+  font-size: 10px;
+  font-weight: 500;
+  color: #bdbdbd;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 5px;
+}
+
+#smallWeatherImages{
+  max-height: 24px; 
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(218, 218, 218);
+  border-radius: 100px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+/* ////////////////////////////////////////////////////////////  */
+
+
+#inputArea{
 
   min-width: 300px;
   max-width: 400px;
@@ -167,9 +233,7 @@ border-radius: 10px;
   align-items: center;
 
   padding-top: 10px;
-  
 }
-
 
 #inputTextfield{
   height: 30px;
@@ -201,138 +265,9 @@ border-radius: 10px;
   color: transparent;
 }
 
-#locationDiv{
-  height: 30px;
-  width: 25px;
-
-  border: none;
-  border-radius: 0px 3px 3px 0px ;
-
-  background-color: #000000;
-  color: #ffffff;
-  font-weight: 700;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-.visualSeperator{
-  height: 1px;
-  width: 95%;
-  background-color: rgb(49, 49, 49);
-}
-
-
-
-.forecast{
-  display: flex;
-  flex-direction: row;
-  overflow: auto;
-  padding: 5px 5px 5px 5px;
-
-  height: 25%;
-  min-height: 70px;
-  width: 100%;
-
-  gap: 5px;
-
-  border-radius: 10px  10px 10px 10px;
-
-  background-color: #151515;
-}
-
-.forecastDay{
-  min-width: 25%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
-
-  border-width: 3px;
-  border-color: rgb(58, 58, 58);
-  border-radius: 5px;
-  border-style: none;
-
-  background-color: #000000;
-
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.forecastDate{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: flex-start;
-  padding-top: 5px;
-  padding-left: 7px ;
-
-  color: #bdbdbd;
-}
-
-
-/* width */
-::-webkit-scrollbar {
-  width: 2px;
-  height: 4px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: none;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(218, 218, 218);
-  border-radius: 100px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+/* ////////////////////////////////////////////////////////////  */
 
 
 #errorAlert{
   padding-top: 10px;
-}
-
-
-.column{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.weatherImage{
-  max-width: 64px;
-}
-
-.weatherImage2{
-  max-height: 24px; 
-}
-
-
-.iconAndTemp{
-  font-size: 10px;
-  font-weight: 500;
-  color: #bdbdbd;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  gap: 5px;
-}
-
-
-.image{
-  max-width: 100%;
 }

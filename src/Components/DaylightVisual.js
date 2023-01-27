@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import '../CSS/CustomProgressBar.css';
+import '../CSS/DaylightVisual.css';
 
-function CustomProgressBar({ daylightProgress }) {
+function DaylightVisual({ daylightProgress }) {
 
    const [daylightPercentValue, setdaylightPercentValue] = useState(daylightProgress);
 
@@ -13,8 +13,6 @@ function CustomProgressBar({ daylightProgress }) {
    
 
    useEffect(() => {
-
-      console.log(daylightProgress);
 
       if (daylightProgress >= 20 && daylightProgress <= 80) {
          setdaylightPercentValue(100);
@@ -62,10 +60,9 @@ function CustomProgressBar({ daylightProgress }) {
 
    if (!isLoading) {
 
-
       return (
-         <div className='progressCustom'>
-            <div className='mainCircle'>
+         <div id='progressCustom'>
+            <div id='mainCircle'>
                <div className='innerCircles' style={{ background: colorGradientInner[(2 - daylightSelectionInner)] }}>
                   <div className='innerCircles' style={{ background: colorGradientMiddle[4 - daylightSelectionMiddle] }}>
                      <div className='innerCircles' style={{ background: colorGradientOuter[19 - daylightSelectionOuter] }}> </div>
@@ -77,4 +74,4 @@ function CustomProgressBar({ daylightProgress }) {
    }
 }
 
-export default CustomProgressBar
+export default DaylightVisual

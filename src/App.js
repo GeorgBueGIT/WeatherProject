@@ -2,7 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
-import CustomProgressBar from './Components/CustomProgressBar.js';
+import DaylightVisual from './Components/DaylightVisual.js';
 
 
 function App() {
@@ -21,7 +21,9 @@ function App() {
   var dateTime = ((today.getHours() > 9) ? today.getHours() : '0' + today.getHours()) + ":" + ((today.getMinutes() > 9) ? today.getMinutes() : '0' + today.getMinutes())
 
   useEffect(() => {
+
     const fetchURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&key=" + key + "&contentType=json";
+
     const fetchData = async () => {
 
       try {
@@ -32,7 +34,7 @@ function App() {
         });
         const data = await response.json();
         setWeatherData(data);
-        console.log(data);
+        // console.log(data);
         setIsLoading(false);
         setCityApproved(true);
 
@@ -49,6 +51,7 @@ function App() {
 
 
   useEffect(() => {
+
     if (!isLoading) {
       var nowTime = new Date();
       var nowHour = nowTime.getHours();
@@ -79,68 +82,68 @@ function App() {
     return (
       <div className='page'>
 
-        <CustomProgressBar daylightProgress={daylightProgress} />
+        <DaylightVisual daylightProgress={daylightProgress} />
 
-        <div className='weatherData'>
+        <div id='weatherPanel'>
 
-          <div className='head'>
-            <div className='address'>
+          <div id='head'>
+            <div id='address'>
               <b> {weatherData.address} </b>
-              <b className='AddressWOCity'> {weatherData.resolvedAddress.split(", ")[1]},  {weatherData.resolvedAddress.split(", ")[2]}</b>
+              <b id='addressWOCity'> {weatherData.resolvedAddress.split(", ")[1]},  {weatherData.resolvedAddress.split(", ")[2]}</b>
             </div>
-            {/* <div> <img src={snow} width={"64px"} height={"64px"} /> </div> */}
-            <div className="icon"> <img src={require('./RealNiceWeatherIcons/' + weatherData.currentConditions.icon + '.png')} alt="Weathericon" className="weatherImage" /> </div>
+            <div> <img src={require('./Media/WeatherIcons/' + weatherData.currentConditions.icon + '.png')} alt="Weathericon" id="weatherImage" /> </div>
 
           </div>
 
 
-          <b className='temp'> {weatherData.currentConditions.temp}°</b>
+          <b id='temp'> {weatherData.currentConditions.temp}°</b>
 
 
-          <div className='rows'>
-
-            <div className='column'>
-              <div className="icon2"> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098355.png'} width={"24px"} height={"24px"} alt="SunriseIcon" /> </div>
+          <div id='sTs'>
+            <div className='sTscolumn'>
+              <div > <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098355.png'} width={"24px"} height={"24px"} alt="SunriseIcon" /> </div>
               <b> {weatherData.currentConditions.sunrise} </b>
             </div>
 
-            <div className='column'>
+            <div className='sTscolumn'>
               <b id="time"> {dateTime} </b>
             </div>
 
-            <div className='column'>
-              <div className="icon2"> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098358.png'} width={"24px"} height={"24px"} alt="SunsetIcon" /> </div>
+            <div className='sTscolumn'>
+              <div> <img src={'https://cdn-icons-png.flaticon.com/512/8098/8098358.png'} width={"24px"} height={"24px"} alt="SunsetIcon" /> </div>
               <b> {weatherData.currentConditions.sunset}  </b>
             </div>
-
           </div>
 
-          {/* <div className='visualSeperator'> </div> */}
+          <img src={require('./Media/pngegg.png')} alt="Just a visual" id='visualLine'></img>
 
-          <img src={require('./CSS/pngegg.png')} alt="Weathericon" className='image'></img>
-
-          <div className="forecast">
+          <div id="forecast">
             {weatherData.days.map((item, id) => {
-              return (
-                <div className="forecastDay" key={id}>
-                  <div className="forecastDate">
-                    <b> {item.datetime.split("-")[2]}. </b>
-                    <b> {item.datetime.split("-")[1]} </b>
+              if (item !== weatherData.days[0]) {
+                return (
+                  <div id="forecastDay" key={id}>
+                    <div id="forecastDate">
+                      <b> {item.datetime.split("-")[2]}. </b>
+                      <b> {item.datetime.split("-")[1]} </b>
+                    </div>
+                    <div id='iconAndTemp'>
+                      <div> <img src={require('./Media/WeatherIcons/' + item.icon + '.png')} alt="Weathericon" id='smallWeatherImages' /> </div>
+                      <b style={{ display: 'flex', justifyContent: 'center' }}> {item.temp}° </b>
+                    </div>
+                    <div></div>
                   </div>
-                  <div className='iconAndTemp'>
-                    <div className="icon"> <img src={require('./RealNiceWeatherIcons/' + item.icon + '.png')} alt="Weathericon" className='weatherImage2' /> </div>
-                    <b style={{ display: 'flex', justifyContent: 'center' }}> {item.temp}° </b>
-                  </div>
-                  <div></div>
-                </div>
-              )
+                )
+              }
+              else {
+                return null;
+              }
             })
             }
           </div>
         </div>
 
 
-        <div className='inputArea'>
+        <div id='inputArea'>
 
           <input type="text" id="inputTextfield" placeholder=" Type in City" value={textInput} onChange={(newValue) => setInput(newValue.target.value)} onKeyDown={event => {
             if (event.key === 'Enter') {
@@ -153,7 +156,7 @@ function App() {
 
 
         <div id='errorAlert'>
-          <Alert severity="error" style={!cityApproved ? {} : { display: 'none' }} > ERROR, city not found!</Alert>
+          <Alert severity="error" style={!cityApproved ? {} : { display: 'none' }} > ERROR, City not found!</Alert>
         </div>
 
       </div>
