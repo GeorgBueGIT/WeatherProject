@@ -13,13 +13,11 @@ function App() {
   const [textInput, setInput] = useState('');
   const [daylightProgress, setDaylightProgress] = useState(0);
   const [cityApproved, setCityApproved] = useState(true);
+  const [dateTime, setDateTime] = useState("404:404");
 
   const key = 'K33WSN84G3H86NQKB86QS9XQF';
 
-
-  var today = new Date();
-  var dateTime = ((today.getHours() > 9) ? today.getHours() : '0' + today.getHours()) + ":" + ((today.getMinutes() > 9) ? today.getMinutes() : '0' + today.getMinutes())
-
+  
   useEffect(() => {
 
     const fetchURL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&key=" + key + "&contentType=json";
@@ -34,7 +32,7 @@ function App() {
         });
         const data = await response.json();
         setWeatherData(data);
-        // console.log(data);
+        console.log(data);
         setIsLoading(false);
         setCityApproved(true);
 
@@ -53,9 +51,9 @@ function App() {
   useEffect(() => {
 
     if (!isLoading) {
-      var nowTime = new Date();
-      var nowHour = nowTime.getHours();
-      var nowMinutes = nowTime.getMinutes();
+      var nowTime = new Date().toLocaleString('be-EU', { timeZone: weatherData.timezone });
+      var nowHour = nowTime.split(", ")[1].split(":")[0];
+      var nowMinutes = nowTime.split(", ")[1].split(":")[1];
 
       var sunriseTime = weatherData.currentConditions.sunrise.split(":");
       var sunsetTime = weatherData.currentConditions.sunset.split(":");
@@ -70,9 +68,15 @@ function App() {
       }
       else {
         const minutesSunsetDifSunrise = ((parseInt(sunsetTime[1]) + parseInt(sunsetTime[0]) * 60) - (parseInt(sunriseTime[1]) + parseInt(sunriseTime[0]) * 60));
-        const minutesNowDifSunrise = (nowHour * 60 + nowMinutes - (parseInt(sunriseTime[1]) + parseInt(sunriseTime[0]) * 60));
+        const minutesNowDifSunrise = (parseInt(nowHour) * 60 + parseInt(nowMinutes) - (parseInt(sunriseTime[1]) + parseInt(sunriseTime[0]) * 60));
         setDaylightProgress(Math.round(((minutesNowDifSunrise / minutesSunsetDifSunrise) * 100)));
       }
+
+
+      var today = new Date().toLocaleString('be-EU', { timeZone: weatherData.timezone });
+      setDateTime(nowHour + ":" + nowMinutes);
+
+
     }
   }, [isLoading, weatherData]);
 
