@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import DaylightVisual from './Components/DaylightVisual.js';
+import CityResize from './Components/CityResize';
 
 
 function App() {
@@ -60,10 +61,10 @@ function App() {
 
       // console.log("Now: " + nowHour + ":" + nowMinutes + "  Sunset: " + sunsetTime[0] + ":" + sunsetTime[1]);
 
-      if ((nowMinutes <= parseInt(sunriseTime[1]) && nowHour === parseInt(sunriseTime[0])) || nowHour < parseInt(sunriseTime[0])) {
+      if ((nowMinutes <= parseInt(sunriseTime[1]) && parseInt(nowHour) === parseInt(sunriseTime[0])) || parseInt(nowHour) < parseInt(sunriseTime[0])) {
         setDaylightProgress(0);
       }
-      else if ((nowMinutes >= parseInt(sunsetTime[1]) && nowHour === parseInt(sunsetTime[0])) || nowHour > parseInt(sunsetTime[0])) {
+      else if ((nowMinutes >= parseInt(sunsetTime[1]) && parseInt(nowHour) === parseInt(sunsetTime[0])) || parseInt(nowHour) > parseInt(sunsetTime[0])) {
         setDaylightProgress(100);
       }
       else {
@@ -72,10 +73,7 @@ function App() {
         setDaylightProgress(Math.round(((minutesNowDifSunrise / minutesSunsetDifSunrise) * 100)));
       }
 
-
-      var today = new Date().toLocaleString('be-EU', { timeZone: weatherData.timezone });
       setDateTime(nowHour + ":" + nowMinutes);
-
 
     }
   }, [isLoading, weatherData]);
@@ -92,7 +90,7 @@ function App() {
 
           <div id='head'>
             <div id='address'>
-              <b> {weatherData.address} </b>
+              <CityResize city={city}/>
               <b id='addressWOCity'> {weatherData.resolvedAddress.split(", ")[1]},  {weatherData.resolvedAddress.split(", ")[2]}</b>
             </div>
             <div> <img src={require('./Media/WeatherIcons/' + weatherData.currentConditions.icon + '.png')} alt="Weathericon" id="weatherImage" /> </div>
